@@ -252,6 +252,7 @@ $(document).on("click", ".viewNotes", function () {
     });
 
     $(document).on("click", ".scrape", function () {
+        console.log('scrape clicked')
         $.ajax({
             method: "GET",
             url: "/scrape"
