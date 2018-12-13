@@ -145,8 +145,6 @@ $(document).on("click", ".viewNotes", function () {
             url: "/notes/" + thisId
         })
             .then(function (data) {
-                let noteId = data.note
-                console.log("NOTE ID:", noteId);
                 $('.card-' + thisId).empty();
             });
     })

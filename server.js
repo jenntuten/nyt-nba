@@ -40,24 +40,6 @@ app.get("/saved", function (req, res) {
   res.send("Hello world");
 });
 
-// Retrieve data from the db
-/*============================
-NOT CURRENTLY WORKING; Cannot read property 'find' of undefined
-============================*/
-app.get("/all", function (req, res) {
-  // Find all results from the scrapedData collection in the db
-  db.scrapedData.find({}, function (error, found) {
-    // Throw any errors to the console
-    if (error) {
-      console.log(error);
-    }
-    // If there are no errors, send the data to the browser as json
-    else {
-      res.json(found);
-    }
-  });
-});
-
 // Scrape data from one site and place it into the mongodb db
 app.get("/scrape", function (req, res) {
   // Make a request via axios for the news section of `ycombinator`
@@ -69,7 +51,7 @@ app.get("/scrape", function (req, res) {
     $("article").each(function (i, element) {
       var result = {};
 
-      // Add the text and href of every link, and save them as properties of the result object
+      // Save title, description, date and link as properties of the result object.
       result.title = $(this)
         .children("div.story-body")
         .children("a")
@@ -109,7 +91,6 @@ app.get("/scrape", function (req, res) {
     // Send a "Scrape Complete" message to the browser
     res.send("Scrape Complete");
   });
-
 })
 
 //Find all articles
