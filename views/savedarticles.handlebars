@@ -54,7 +54,11 @@
                     <h6></h6>
       <p data-id="{{this._id}}"><h4><strong><a href="{{this.link}}" target="_blank">{{this.title}}</a></strong></h4>
       <h5>{{this.desc}}</h5>
-      <button data-id="{{this._id}}"class="btn btn-danger save">Save Article</button></p>
+      <button data-id="{{this._id}}" data-isSaved="{{this.isSaved}}" class="btn btn-danger unsave">Delete Article</button></p>
+      <button data-id="{{this._id}}" class="btn btn-success viewNotes">View Notes</button>
+      <button data-id="{{this._id}}" class="btn btn-success addNote">Add Note</button></p>
+      <div id="note-{{this._id}}"></div>
+      <div id="add-note-{{this._id}}"></div>
       <div id="{{this._id}}">{{/each}}</div>
       <div id="notes"></div>
             </div>
