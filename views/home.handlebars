@@ -50,7 +50,7 @@
                 View and Save Articles
             </div>
             <div class="card-body">
-                <div id="articles">{{#each saved}}
+                <div id="scrapedArticles">{{#each unsavedArticles}}
                     <h6></h6>
       <p data-id="{{this._id}}"><h4><strong><a href="{{this.link}}" target="_blank">{{this.title}}</a></strong></h4>
       <h5>{{this.desc}}</h5>

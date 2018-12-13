@@ -50,12 +50,12 @@
                 View and Save Articles
             </div>
             <div class="card-body">
-                <div id="articles">{{#each saved}}
-                    <h6></h6>
-      <p data-id="{{this._id}}"><h4><strong><a href="{{this.link}}" target="_blank">{{this.title}}</a></strong></h4>
-      <h5>{{this.desc}}</h5>
-      <button data-id="{{this._id}}"class="btn btn-danger save">Save Article</button></p>
-      <div id="{{this._id}}">{{/each}}</div>
+                <div id="articles">{{#each unsavedArticles}}
+                    <h6>{{date}}</h6>
+      <p data-id="{{dataId}}"><h4><strong><a href="{{link}}" target="_blank">{{title}}</a></strong></h4>
+      <h5>{{description}}</h5>
+      <button data-id="{{dataId}}"class="btn btn-danger save">Save Article</button></p>
+      <div id="{{dataId}}">{{/each}}</div>
       <div id="notes"></div>
             </div>
         </div>

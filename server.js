@@ -36,6 +36,29 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/nytimesnba", { useNewUrlParser: true });
 
+//Render saved articles
+app.get("/savedarticles", function (req, res) {
+  db.Article.find({ isSaved: true })
+    .then(function (dbArticle) {
+      console.log(dbArticle) //accurately shows saved articles
+      res.render("savedarticles", {savedArticles: dbArticle});
+    })
+})
+//Render scraped articles on home page
+app.get("/home", function (req, res) {
+  db.Article.find({ isSaved: false })
+    .then(function (dbArticle) {
+      var unsavedArticles = dbArticle.reduce((unique, o) => {
+        if (!unique.some(obj => obj.title === o.title)) {
+            unique.push(o);
+        }
+        return unique;
+    }, []);
+    console.log(unsavedArticles) //accurately shows unsaved
+
+      res.render("home", {unsavedArticles: unsavedArticles});
+    })
+})
 
 // Scrape data from one site and place it into the mongodb db
 app.get("/scrape", function (req, res) {
@@ -121,7 +144,7 @@ app.get("/notes", function (req, res) {
 //Route for notes by ID
 app.get("/notes/:id", function (req, res) {
   db.Note.findOne({ _id: req.params.id })
-  //.populate("note")
+    //.populate("note")
     .then(function (dbNote) {
       res.json(dbNote);
     })
@@ -165,7 +188,7 @@ app.delete("/articles/:id", function (req, res) {
 //Find article by specific ID to add note
 app.get("/articles/:id", function (req, res) {
   db.Article.findOne({ _id: req.params.id })
-  .populate("note")
+    .populate("note")
     .then(function (dbArticle) {
       res.json(dbArticle);
     })
@@ -176,19 +199,19 @@ app.get("/articles/:id", function (req, res) {
 });
 
 // Save/update an article's note
-app.post("/articles/:id", function(req, res) {
+app.post("/articles/:id", function (req, res) {
   // Create a new note and pass the req.body to the entry
   db.Note.create(req.body)
-    .then(function(dbNote) {
+    .then(function (dbNote) {
       // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
       // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
       return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
     })
-    .then(function(dbArticle) {
+    .then(function (dbArticle) {
       // If we were able to successfully update an Article, send it back to the client
       res.json(dbArticle);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       // If an error occurred, send it to the client
       res.json(err);
     });
@@ -208,6 +231,7 @@ app.delete("/notes/:id", function (req, res) {
     });
 });
 
-app.listen(PORT, function() {
+
+app.listen(PORT, function () {
   console.log("App running on port " + PORT + "!");
 });
