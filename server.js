@@ -60,6 +60,22 @@ app.get("/home", function (req, res) {
     })
 })
 
+//Render scraped articles on home page
+app.get("/", function (req, res) {
+  db.Article.find({ isSaved: false })
+    .then(function (dbArticle) {
+      var unsavedArticles = dbArticle.reduce((unique, o) => {
+        if (!unique.some(obj => obj.title === o.title)) {
+            unique.push(o);
+        }
+        return unique;
+    }, []);
+    console.log(unsavedArticles) //accurately shows unsaved
+
+      res.render("home", {unsavedArticles: unsavedArticles});
+    })
+})
+
 // Scrape data from one site and place it into the mongodb db
 app.get("/scrape", function (req, res) {
   // Make a request via axios for the news section of `ycombinator`
