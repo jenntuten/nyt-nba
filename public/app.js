@@ -3,8 +3,8 @@ DATA TO LOAD TO PAGE
 ==================*/
 
 // Create a function to get articles on page load and when scraping.
-function getArticles() {
-    $.getJSON("/articles", function (initialData) {
+//function getArticles() {
+    /*$.getJSON("/articles", function (initialData) {
         console.log(initialData)
 
         //Filter out duplicate results
@@ -36,14 +36,14 @@ function getArticles() {
       <br>
       `);
         }
-    });
-}
+    });*/
+//}
 
 //Get articles on page load.
-getArticles();
+//getArticles();
 
 //Filter out articles to display only those where "isSaved = true".
-$.getJSON("/articles", function (data) {
+/*$.getJSON("/articles", function (data) {
     var savedArticles = data.filter(obj => {
         return obj.isSaved === true;
     })
@@ -67,7 +67,7 @@ $.getJSON("/articles", function (data) {
       <br>
       `);
     }
-});
+});*/
 
 /*==================
 BUTTON FUNCTIONALITY
