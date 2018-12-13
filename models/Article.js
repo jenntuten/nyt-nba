@@ -25,6 +25,7 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
+  //set default to false to load initial articles to home page
   isSaved: {
     type: Boolean,
     default: false
