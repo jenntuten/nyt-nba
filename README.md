@@ -2,7 +2,7 @@
 
 ### Overview
 
-This is a web app that lets users view and leave comments on the latest NBA news from the New York Times.
+This is a web app that lets users view and leave comments on the latest NBA news from the New York Times. View the app here: https://nytimes-nba.herokuapp.com/.
 
 ### Technologies
 
@@ -18,13 +18,9 @@ This is a web app that lets users view and leave comments on the latest NBA news
 
 ## Details
 
-  1. Whenever a user visits the site, the app displays stories the New York Times' NBA news section. These scraped articles are saved to the application database, displaying the following information for each article:
-
-     * Headline - the title of the article
-
-     * Summary - a short summary of the article
-
-     * URL - the url to the original article
-
-  2. Users can also leave comments on the articles displayed and revisit them later. The comments are saved to the database as well and associated with their articles (by title). Users can also delete comments left on articles. Stored comments are visible to every user.
+Whenever a user visits the site, the app displays stories from the New York Times' NBA news section. These scraped articles are saved to the application database, displaying the headline and summary. \
+\
+Users can also click on the title to be redirected to the New York Times article. On the home page, users have the option to save articles, and under the Saved Articles section, users can view, add and delete notes associated with each individual article.\
+\
+These comments can be revisited later, as they are linked to their respective articles by article title. Stored comments are visible to every user.
 
